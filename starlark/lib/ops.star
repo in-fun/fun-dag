@@ -28,7 +28,7 @@ def batch_ranking(name, app, state, id_selectors=[], predicate=None):
         predicate
     )
 
-def realtime_ranking(name, app, state, model, predicate=None):
+def realtime_ranking(name, model, app="ranking", state="RELEASE", predicate=None):
     return ranking(
         name,
         {
@@ -39,3 +39,14 @@ def realtime_ranking(name, app, state, model, predicate=None):
         },
         predicate
     )
+
+def container_pinning(name, containers, predicate=None):
+    return node(
+        name,
+        'container_pin',
+        {"containers": containers},
+        predicate
+    )
+
+def apply_node(src):
+    return node("{src}:apply".format(src=src), 'apply', None, None)

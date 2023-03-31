@@ -5,7 +5,7 @@
 # graph.edges = []
 
 
-def node(name, operation, conf, predicate):
+def node(name, operation, conf={}, predicate=None):
     """
     :rtype: str the node name is returned
     :param name: string unique name of the node
@@ -51,4 +51,13 @@ def sequence(*nodes):
         if i < size - 1:
             dst = nodes[i + 1]
             edge(apply, "{}:apply".format(dst))
+    return last
+
+def before(source, *nodes):
+    size = len(nodes)
+    last = None
+    for i in range(0, size):
+        src = nodes[i]
+        edge(source, src)
+        last = src
     return last
